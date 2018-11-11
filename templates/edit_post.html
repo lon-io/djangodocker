@@ -1,0 +1,8 @@
+<h1>Add New Post</h1>
+<div>
+    <form action="/posts/update/{{post.id}}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
+</div>

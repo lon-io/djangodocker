@@ -21,7 +21,7 @@ class Post(models.Model):
 
         super().save(*args, **kwargs)
 
-class PostTexts(models.Model):
+class PostText(models.Model):
     text = models.CharField(max_length=2000)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     version = models.IntegerField()
