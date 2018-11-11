@@ -2,8 +2,8 @@ from django import forms
 
 class PostForm(forms.Form):
     def __init__(self, *args, **kwargs):
+        is_edit_mode = kwargs.pop('is_edit_mode', False)
         super(PostForm, self).__init__(*args, **kwargs)
-        is_edit_mode = getattr(self, 'is_edit_mode', None)
         if is_edit_mode:
             self.fields['title'].widget.attrs['readonly'] = True
 

@@ -1,3 +1,6 @@
 <h1>{{ post.title }}</h1>
 <p>{{ post_text.text }}</p>
 <a href="/posts/edit/{{post.id}}">Edit Post</a>
+<p>Version: <strong>{{ post_text.version }}</strong></p>
+<p>Last Edited On: <strong>{{ post_text.created_at }}</strong></p>
+<p>Last Edited By: <strong>{{ post_text.author }}</strong></p>

@@ -15,7 +15,7 @@ def post(request, *args, **kwargs):
     print(post_id)
     print(post_id)
     post = Post.objects.get(id=post_id)
-    post_text = PostText.objects.get(post=post)
+    post_text = PostText.objects.filter(post=post).latest('created_at')
     # texts = PostTexts.objects.get(post_id=post_id)
     return render(request, 'post.html', {'post': post, 'post_text': post_text})
 
@@ -59,7 +59,7 @@ def create_post(request):
 def edit_post(request, *args, **kwargs):
     post_id = kwargs.get('post_id')
     post = Post.objects.get(id=post_id)
-    post_text = PostText.objects.get(post=post)
+    post_text = PostText.objects.filter(post=post).latest('created_at')
 
     form = PostForm(initial={'title': post.title, 'text': post_text.text}, is_edit_mode=True)
 
@@ -80,7 +80,7 @@ def update_post(request, *args, **kwargs):
 
             current_user = request.user
 
-            prev_post_text = PostText.object.get(post=post)
+            prev_post_text = PostText.objects.filter(post=post).latest('created_at')
 
             print(prev_post_text)
             print(prev_post_text)
