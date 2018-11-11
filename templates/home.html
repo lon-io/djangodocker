@@ -1,6 +1,9 @@
 <h1>Message board homepage</h1>
+<a href="/posts/create">Add New Post</a>
 <ul>
-  {% for post in all_posts_list %}
-    <li>{{ post.text }}</li>
+  {% for post in posts %}
+    <a href="/posts/{{post.id}}">
+        <li>{{ post.title }}</li>
+    </a>
   {% endfor %}
 </ul>
