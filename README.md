@@ -8,7 +8,7 @@
 - Multi-editor Post system
 - Django (Routing, ORM, Templating, Forms...)
 - Docker and Docker Compose
-- Postgres
+- PostgreSQL
 
 ### Setup
 - `chmod +x bin/*`
@@ -20,3 +20,4 @@
 - Add Unit Tests
 - Implement Post Comments
 - Version History
+- UI improvement
