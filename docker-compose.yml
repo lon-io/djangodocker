@@ -16,10 +16,7 @@ services:
     container_name: djangodocker_web
     stdin_open: true
     tty: true
-    command: tail -f /dev/null
-    # command: >
-    #   python /djangodocker/manage.py migrate --noinput
-    #   python /djangodocker/manage.py runserver 0.0.0.0:8000
+    command: tail -f /dev/null # Keep the container alive
     volumes:
       - .:/djangodocker
     ports:
