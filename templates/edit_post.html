@@ -1,4 +1,8 @@
-<h1>Add New Post</h1>
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts/{{post.id}}">Post</a></li>
+</ul>
+<h1>Edit Post</h1>
 <div>
     <form action="/posts/update/{{post.id}}" method="post">
         {% csrf_token %}
