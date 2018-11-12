@@ -5,22 +5,18 @@ from .forms import PostForm
 
 def index(request):
     posts = Post.objects.all()
-    return render(request, 'home.html', {'posts': posts})
+    return render(request, 'index.html', {'posts': posts})
 
 def post(request, *args, **kwargs):
     post_id = kwargs.get('post_id')
-    # post_text
-    print(kwargs)
-    print(post_id)
-    print(post_id)
-    print(post_id)
+
     post = Post.objects.get(id=post_id)
     post_text = PostText.objects.filter(post=post).latest('created_at')
-    # texts = PostTexts.objects.get(post_id=post_id)
+
     return render(request, 'post.html', {'post': post, 'post_text': post_text})
 
 def create_post(request):
-    # if this is a POST request we need to process the form data
+    # if this is a POST request, process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = PostForm(request.POST)
@@ -44,12 +40,9 @@ def create_post(request):
             # else:
             #     # Do something for anonymous users.
 
-            # process the data in form.cleaned_data as required
-            # ...
             # redirect to a new URL:
             return HttpResponseRedirect('/')
         else:
-            print('Invalid')
             print('Invalid')
     else:
         form = PostForm()
@@ -69,36 +62,28 @@ def update_post(request, *args, **kwargs):
     post_id = kwargs.get('post_id')
     post = Post.objects.get(id=post_id)
 
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = PostForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            print('Valid')
-            text = form.cleaned_data['text']
+    # create a form instance and populate it with data from the request:
+    form = PostForm(request.POST)
+    # check whether it's valid:
+    if form.is_valid():
+        text = form.cleaned_data['text']
 
-            current_user = request.user
+        current_user = request.user
 
-            prev_post_text = PostText.objects.filter(post=post).latest('created_at')
+        prev_post_text = PostText.objects.filter(post=post).latest('created_at')
 
-            print(prev_post_text)
-            print(prev_post_text)
-            print(prev_post_text)
+        new_post_text = PostText(text=text, post=post, version=prev_post_text.version + 1, author=current_user)
+        new_post_text.save()
 
-            new_post_text = PostText(text=text, post=post, version=prev_post_text.version + 1, author=current_user)
-            new_post_text.save()
+        # Todo: check auth
+        # if request.user.is_authenticated():
+        #     # Do something for authenticated users.
+        # else:
+        #     # Do something for anonymous users.
 
-            # Todo: check auth
-            # if request.user.is_authenticated():
-            #     # Do something for authenticated users.
-            # else:
-            #     # Do something for anonymous users.
-
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect(f'/posts/{post.id}')
-        else:
-            print('Invalid')
+        # process the data in form.cleaned_data as required
+        # ...
+        # redirect to a new URL:
+        return HttpResponseRedirect(f'/posts/{post.id}')
+    else:
             print('Invalid')
