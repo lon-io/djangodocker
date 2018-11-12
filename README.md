@@ -1,8 +1,12 @@
-### Sample Django App setup with Docker
+## Sample Django App setup with Docker
+
+### Prerequisites
+- Docker (https://docs.docker.com/install)
+- docker-compose (https://docs.docker.com/compose/install/)
 
 ### Features
 - Multi-editor Post system
-- Django (Routing, ORM, Forms...)
+- Django (Routing, ORM, Templating, Forms...)
 - Docker and Docker Compose
 - Postgres
 
