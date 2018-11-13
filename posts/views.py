@@ -7,8 +7,8 @@ def index(request):
     posts = Post.objects.all()
     return render(request, 'index.html', {'posts': posts})
 
-def post(request, *args, **kwargs):
-    post_id = kwargs.get('post_id')
+def post(request, post_id):
+    print(post_id)
 
     post = Post.objects.get(id=post_id)
     post_text = PostText.objects.filter(post=post).latest('created_at')
@@ -44,6 +44,8 @@ def create_post(request):
             return HttpResponseRedirect('/')
         else:
             print('Invalid')
+            return HttpResponseRedirect(f'/posts/create')
+
     else:
         form = PostForm()
 
@@ -86,4 +88,5 @@ def update_post(request, *args, **kwargs):
         # redirect to a new URL:
         return HttpResponseRedirect(f'/posts/{post.id}')
     else:
-            print('Invalid')
+        print('Invalid')
+        return HttpResponseRedirect(f'/posts/edit{post.id}')
