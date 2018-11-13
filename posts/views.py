@@ -51,8 +51,7 @@ def create_post(request):
 
         return render(request, 'new_post.html', {'form': form})
 
-def edit_post(request, *args, **kwargs):
-    post_id = kwargs.get('post_id')
+def edit_post(request, post_id):
     post = Post.objects.get(id=post_id)
     post_text = PostText.objects.filter(post=post).latest('created_at')
 
@@ -60,8 +59,7 @@ def edit_post(request, *args, **kwargs):
 
     return render(request, 'edit_post.html', {'form': form, 'post': post, 'post_text': post_text})
 
-def update_post(request, *args, **kwargs):
-    post_id = kwargs.get('post_id')
+def update_post(request, post_id):
     post = Post.objects.get(id=post_id)
 
     # create a form instance and populate it with data from the request:
